@@ -28,12 +28,12 @@ pipeline {
     
     stage('Docker Image Creation') {
       steps {
-        sh 'docker build -t seemady/insureproject1:latest .'
+        sh 'docker build -t seemayd/insureproject1:latest .'
             }
     }
     stage('DockerLogin') {
       steps {
-       withCredentials([usernamePassword(credentialsId: 'Dockerlogin-user', passwordVariable: 'Dockerpassword', usernameVariable: 'Dockerlogin')]) {
+       withCredentials([usernamePassword(credentialsId: 'Dockerloginuser', passwordVariable: 'Dockerpassword', usernameVariable: 'Dockerlogin')]) {
        sh "docker login -u ${env.Dockerlogin} -p ${env.Dockerpassword}"
             }
         }
@@ -41,7 +41,7 @@ pipeline {
 
     stage('Push Image to DockerHub') {
       steps {
-        sh 'docker push seemady/insureproject1:latest'
+        sh 'docker push seemayd/insureproject1:latest'
             }
     }
     stage('Deploy Application using Ansible') {
